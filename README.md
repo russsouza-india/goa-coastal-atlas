@@ -2,32 +2,37 @@
 
 An interactive Progressive Web App for exploring Goa's coastline, from North Goa through the Central Goa–Panaji pocket to South Goa.
 
-## Included
+## Project package
+The complete app source is included in **`Goa_Coastal_Atlas_PWA.tar.gz`**. It contains the HTML interface, styling, JavaScript application and coastal-location data, PWA manifest, app icon, service worker, and photo-credit register.
+
+## Features
 - 50 coastal-location information panels
 - North, Central and South Goa coastal circuits
 - Interactive map and Google Maps location links
 - Geographical learning notes
 - Photo credits and licensing review register
-- PWA manifest, icon and service worker
+- Installable PWA with service-worker app-shell caching
 - Automated GitHub Pages deployment
 
 ## Live site
-After the GitHub Pages workflow succeeds:
+After Pages is enabled and the deployment workflow succeeds:
 https://russsouza-india.github.io/goa-coastal-atlas/
 
-## Deployment
-The workflow in `.github/workflows/pages.yml` reassembles the source archive from the small text parts in `.github/source-parts/`, verifies its SHA-256 checksum, extracts the app into the Pages artifact, and deploys it.
+## Enable GitHub Pages
+The connected GitHub Actions token cannot enable the repository's Pages site automatically. Do this once in GitHub:
 
-In GitHub, open **Settings → Pages** and choose **GitHub Actions** as the build and deployment source if it is not already selected. Then check the **Actions** tab for the deployment workflow.
+1. Open **Settings → Pages**.
+2. Under **Build and deployment**, choose **GitHub Actions** as the source.
+3. Open the **Actions** tab and run or re-run **Deploy Goa Coastal Atlas to GitHub Pages**.
 
-## Local use
-Download `Goa_Coastal_Atlas_PWA.tar.gz` from the project release/source package or concatenate the source parts and decode them:
+Subsequent pushes to `main` deploy automatically.
+
+## Run locally
+Download `Goa_Coastal_Atlas_PWA.tar.gz`, extract it, enter the extracted folder, and run:
 
 ```bash
-cat .github/source-parts/part-*.txt | base64 --decode > Goa_Coastal_Atlas_PWA.tar.gz
-mkdir goa-atlas
-tar -xzf Goa_Coastal_Atlas_PWA.tar.gz --strip-components=1 -C goa-atlas
-cd goa-atlas
+tar -xzf Goa_Coastal_Atlas_PWA.tar.gz
+cd goa_coastal_atlas_pwa
 python -m http.server 8000
 ```
 

@@ -24,18 +24,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Configure and enable Pages
+      - name: Configure Pages
         uses: actions/configure-pages@v5
-        with:
-          enablement: true
 
-      - name: Reassemble and verify the PWA package
+      - name: Verify and prepare the PWA
         run: |
-          cat .github/source-parts/part-*.txt > /tmp/goa-atlas.b64
-          base64 --decode /tmp/goa-atlas.b64 > /tmp/goa-atlas.tar.gz
-          echo "676ba08bf4399d734392614161ec7d3b8b78fa76c7845d90113a04efaea17d86  /tmp/goa-atlas.tar.gz" | sha256sum --check
+          echo "676ba08bf4399d734392614161ec7d3b8b78fa76c7845d90113a04efaea17d86  Goa_Coastal_Atlas_PWA.tar.gz" | sha256sum --check
           mkdir -p _site
-          tar -xzf /tmp/goa-atlas.tar.gz --strip-components=1 -C _site
+          tar -xzf Goa_Coastal_Atlas_PWA.tar.gz --strip-components=1 -C _site
           test -f _site/index.html
           test -f _site/manifest.webmanifest
           test -f _site/sw.js
