@@ -35,7 +35,9 @@ jobs:
           test -f _site/index.html
           test -f _site/manifest.webmanifest
           test -f _site/sw.js
-          cp coast-learning.css coast-learning.js _site/
+          cp coast-learning.css coast-learning.js coastal-challenge.css coastal-challenge.js _site/
+          sed -i 's#</head>#<link rel="stylesheet" href="coastal-challenge.css"></head>#' _site/index.html
+          sed -i 's#</body>#<script src="coastal-challenge.js"></script></body>#' _site/index.html
           sed -i 's#</head>#<link rel="stylesheet" href="coast-learning.css"></head>#' _site/index.html
           sed -i 's#</body>#<script src="coast-learning.js"></script></body>#' _site/index.html
           touch _site/.nojekyll
