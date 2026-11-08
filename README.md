@@ -1,47 +1,48 @@
 # Goa Coastal Atlas PWA
 
-An interactive student-facing Progressive Web App for exploring 50 named coastal locations along Goa's shoreline, from North Goa through the Central Goa–Panaji pocket to South Goa.
+An interactive Progressive Web App for exploring Goa's coastline, from North Goa through the Central Goa–Panaji pocket to South Goa.
 
-## What is included
-The complete application source and data are preserved in `Goa_Coastal_Atlas_PWA.tar.gz`. The GitHub Pages workflow extracts this archive during deployment, so the published site contains the actual app files rather than only the archive.
-
-- Interactive coastline map with coastal location markers
-- 50 beach and coastal-location information panels
-- North, Central and South Goa circuits
-- Google Maps location links
-- Geographical learning notes and fieldwork prompts
-- Photo attribution and licensing register
-- PWA manifest, app icon and service worker for installation and app-shell caching
+## Included
+- 50 coastal-location information panels
+- North, Central and South Goa coastal circuits
+- Interactive map and Google Maps location links
+- Geographical learning notes
+- Photo credits and licensing review register
+- PWA manifest, icon and service worker
+- Automated GitHub Pages deployment
 
 ## Live site
-After the first successful GitHub Pages deployment:
+After the GitHub Pages workflow succeeds:
 https://russsouza-india.github.io/goa-coastal-atlas/
 
 ## Deployment
-The workflow at `.github/workflows/pages.yml` deploys automatically on each push to `main`.
+The workflow in `.github/workflows/pages.yml` reassembles the source archive from the small text parts in `.github/source-parts/`, verifies its SHA-256 checksum, extracts the app into the Pages artifact, and deploys it.
 
-In the repository, open **Settings → Pages** and set the build and deployment source to **GitHub Actions** if it is not already selected. Then open **Actions** and check the “Deploy Goa Coastal Atlas to GitHub Pages” run.
+In GitHub, open **Settings → Pages** and choose **GitHub Actions** as the build and deployment source if it is not already selected. Then check the **Actions** tab for the deployment workflow.
 
 ## Local use
-Extract `Goa_Coastal_Atlas_PWA.tar.gz`, enter the extracted folder, and run:
+Download `Goa_Coastal_Atlas_PWA.tar.gz` from the project release/source package or concatenate the source parts and decode them:
 
 ```bash
+cat .github/source-parts/part-*.txt | base64 --decode > Goa_Coastal_Atlas_PWA.tar.gz
+mkdir goa-atlas
+tar -xzf Goa_Coastal_Atlas_PWA.tar.gz --strip-components=1 -C goa-atlas
+cd goa-atlas
 python -m http.server 8000
 ```
 
 Open http://localhost:8000.
 
 ## Map, image and accuracy notes
-- The interactive base map uses OpenStreetMap tiles (attribution appears in the app).
-- Each location includes a Google Maps search link.
-- Marker coordinates are approximate educational locators, not surveyed coordinates. Validate them against local sources before formal institutional use.
-- Photo-source and licence review status is recorded in `photo_credits_register.csv`. Candidate links that still require manual verification should not be treated as fully verified attributions.
-- The app is a learning resource, not an official beach inventory, navigation/safety tool, or conservation-permission guide.
-- Map tiles and photographs require internet access; the service worker caches the app shell, not full offline maps.
+- The interactive basemap uses OpenStreetMap tiles; attribution is shown in the app.
+- Google Maps links open location searches for each coastal place.
+- Map markers are approximate educational locators, not surveyed coordinates.
+- Photo-source and licence status is recorded in `photo_credits_register.csv`. Candidate sources requiring manual review should not be treated as fully verified attributions.
+- This is an educational resource, not an official inventory, navigation/safety tool or conservation-permission guide.
+- Map tiles and photographs require an internet connection. The service worker caches the app shell, not full offline maps.
 
-## Main sources
+## Main references
 - Government of Goa – Beaches: https://www.goa.gov.in/what_to_see/beaches/
 - Government of Goa – Morjim: https://www.goa.gov.in/places/morjim/
 - Government of Goa – Agonda: https://www.goa.gov.in/places/agonda-beach/
 - Government of Goa – Palolem: https://www.goa.gov.in/places/palolem-beach/
-- Goa Forest Department / Goa University, 2023 mangrove and intertidal mudflat report: https://forest.goa.gov.in/sites/default/files/2024-04/Conservtion%20and%20management%20of%20mangroves_0.pdf
